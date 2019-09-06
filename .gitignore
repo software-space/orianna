@@ -28,3 +28,5 @@ hs_err_pid*
 *target/
 /.metadata/
 *dependency-reduced-pom.xml
+
+.idea/

@@ -2,11 +2,7 @@ package com.merakianalytics.orianna.types.core.league;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
-import com.merakianalytics.orianna.types.common.Division;
-import com.merakianalytics.orianna.types.common.Platform;
-import com.merakianalytics.orianna.types.common.Queue;
-import com.merakianalytics.orianna.types.common.Region;
-import com.merakianalytics.orianna.types.common.Tier;
+import com.merakianalytics.orianna.types.common.*;
 import com.merakianalytics.orianna.types.core.OriannaObject;
 import com.merakianalytics.orianna.types.core.searchable.Searchable;
 import com.merakianalytics.orianna.types.core.summoner.Summoner;
@@ -17,7 +13,7 @@ public class LeagueEntry extends OriannaObject<com.merakianalytics.orianna.types
     private final Supplier<League> league = Suppliers.memoize(new Supplier<League>() {
         @Override
         public League get() {
-            if(coreData.getLeagueId() == null) {
+            if (coreData.getLeagueId() == null) {
                 return null;
             }
             return League.withId(coreData.getLeagueId()).withPlatform(Platform.withTag(coreData.getPlatform())).get();
@@ -27,7 +23,7 @@ public class LeagueEntry extends OriannaObject<com.merakianalytics.orianna.types
     private final Supplier<Series> promos = Suppliers.memoize(new Supplier<Series>() {
         @Override
         public Series get() {
-            if(coreData.getPromos() == null) {
+            if (coreData.getPromos() == null) {
                 return null;
             }
             return new Series(coreData.getPromos());
@@ -37,11 +33,11 @@ public class LeagueEntry extends OriannaObject<com.merakianalytics.orianna.types
     private final Supplier<Summoner> summoner = Suppliers.memoize(new Supplier<Summoner>() {
         @Override
         public Summoner get() {
-            if(coreData.getSummonerId() == null) {
+            if (coreData.getSummonerId() == null) {
                 return null;
             }
             final Summoner summoner = Summoner.withId(coreData.getSummonerId()).withPlatform(Platform.withTag(coreData.getPlatform())).get();
-            if(summoner.getCoreData().getName() == null) {
+            if (summoner.getCoreData().getName() == null) {
                 summoner.getCoreData().setName(coreData.getSummonerName());
             }
             return summoner;
@@ -55,11 +51,11 @@ public class LeagueEntry extends OriannaObject<com.merakianalytics.orianna.types
     @Override
     public int compareTo(final LeagueEntry o) {
         int result = getTier().compare(o.getTier());
-        if(result != 0) {
+        if (result != 0) {
             return result;
         }
         result = getDivision().compare(o.getDivision());
-        if(result != 0) {
+        if (result != 0) {
             return result;
         }
         return Integer.compare(getLeaguePoints(), o.getLeaguePoints());
@@ -90,7 +86,7 @@ public class LeagueEntry extends OriannaObject<com.merakianalytics.orianna.types
     }
 
     public Queue getQueue() {
-        return Queue.valueOf(coreData.getQueue());
+        return Queue.withApiName(coreData.getQueue());
     }
 
     public Region getRegion() {
