@@ -523,7 +523,7 @@ public enum Queue {
 
     private static final Map<Integer, Queue> BY_ID = getById();
     private static final Map<String, Queue> BY_API_NAME = getByApiName();
-    public static final Set<Queue> RANKED = ImmutableSet.of(RANKED_SOLO_5X5, RANKED_FLEX_SR, RANKED_FLEX_TT);
+    public static final Set<Queue> RANKED = ImmutableSet.of(RANKED_SOLO_5X5, RANKED_FLEX_SR, RANKED_FLEX_TT, RANKED_TFT);
 
     private static Map<Integer, Queue> getById() {
         final Builder<Integer, Queue> builder = ImmutableMap.builder();
